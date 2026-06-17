@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ILLUSTRA 13</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Oswald:wght@200;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --ink:      #060606;
+      --pitch:    #0c0c0c;
+      --void:     #111111;
+      --smolder:  #1a1a1a;
+      --ember:    #b8282a;
+      --blood:    #8b0000;
+      --crimson:  #d4292b;
+      --gold:     #c9a84c;
+      --gold-dim: #8a7035;
+      --bone:     #e8dfd0;
+      --ash:      #a09890;
+      --cinder:   #3a3530;
+      --smoke:    #55504a;
+      --glow-r:   rgba(180,40,42,0.55);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      background:var(--ink);
+      color:var(--bone);
+      font-family:'Cormorant Garamond',Georgia,serif;
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    body::after {
+      content:'';
+      position:fixed; inset:0; pointer-events:none; z-index:9998;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity:.45; mix-blend-mode:overlay;
+    }
+
+    /* HEADER */
+    header {
+      position:sticky; top:0; z-index:1000;
+      background:rgba(6,6,6,0.97);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--cinder);
+      box-shadow:0 1px 0 rgba(201,168,76,0.12),0 8px 40px rgba(0,0,0,0.9);
+    }
+    .header-top {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 60px; height:80px;
+    }
+    .logo {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:2.1rem; letter-spacing:10px;
+      color:var(--bone); text-decoration:none; cursor:pointer;
+      text-shadow:3px 3px 0 var(--blood),6px 6px 0 rgba(139,0,0,0.35),0 0 40px rgba(184,40,42,0.18);
+      transition:text-shadow .3s;
+    }
+    .logo:hover { text-shadow:3px 3px 0 var(--crimson),6px 6px 0 rgba(180,40,42,0.5),0 0 60px rgba(184,40,42,0.45); }
+    .logo em { font-style:normal; color:var(--ember); }
+    .header-badge {
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic; font-size:.62rem;
+      letter-spacing:4px; color:var(--gold-dim);
+      text-transform:uppercase; display:block; margin-top:3px;
+    }
+    .header-right {
+      display:flex; flex-direction:column; align-items:flex-end; gap:5px;
+    }
+    .header-tag {
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic; font-size:.75rem;
+      color:var(--gold-dim); letter-spacing:3px;
+    }
+    .live-dot { display:flex; align-items:center; gap:8px; }
+    .dot {
+      width:7px; height:7px;
+      background:var(--ember); border-radius:50%;
+      box-shadow:0 0 8px var(--glow-r);
+      animation:pulse 2s ease infinite;
+    }
+    .live-txt {
+      font-family:'Oswald',sans-serif;
+      font-size:.55rem; letter-spacing:3px;
+      color:var(--smoke); text-transform:uppercase;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.65)} }
+
+    .nav-strip {
+      background:var(--pitch);
+      border-top:1px solid rgba(201,168,76,0.08);
+      display:flex; justify-content:center;
+    }
+    nav a {
+      font-family:'Oswald',sans-serif;
+      font-weight:400; font-size:.7rem;
+      letter-spacing:5px; text-transform:uppercase;
+      color:var(--ash); text-decoration:none;
+      padding:14px 44px; cursor:pointer;
+      position:relative; transition:color .25s;
+      border-left:1px solid rgba(255,255,255,0.04);
+    }
+    nav a:first-child { border-left:none; }
+    nav a::after {
+      content:'';
+      position:absolute; bottom:0; left:0; right:100%;
+      height:2px;
+      background:linear-gradient(90deg,var(--blood),var(--crimson),var(--gold));
+      transition:right .3s ease;
+    }
+    nav a:hover,nav a.active { color:var(--bone); }
+    nav a:hover::after,nav a.active::after { right:0; }
+
+    /* TICKER */
+    .ticker-wrap {
+      overflow:hidden;
+      background:var(--blood);
+      padding:7px 0;
+      border-bottom:1px solid var(--ember);
+    }
+    .ticker {
+      display:flex; white-space:nowrap;
+      animation:tick 32s linear infinite;
+    }
+    @keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .ticker span {
+      font-family:'Oswald',sans-serif;
+      font-size:.6rem; letter-spacing:4px;
+      color:rgba(255,255,255,.82); padding:0 40px;
+      text-transform:uppercase;
+    }
+    .ticker span::before {
+      content:'✦'; margin-right:40px;
+      color:var(--gold); font-size:.5rem;
+    }
+
+    /* PAGES */
+    .page { display:none; }
+    .page.active { display:block; animation:pgfade .5s ease; }
+    @keyframes pgfade { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+
+    /* ── ABOUT ── */
+    .about-hero {
+      min-height:calc(100vh - 130px);
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      padding:80px 60px; position:relative; overflow:hidden; gap:0;
+    }
+    .about-bg {
+      position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse 60% 60% at 15% 50%,rgba(139,0,0,.18) 0%,transparent 70%),
+        radial-gradient(ellipse 40% 40% at 85% 20%,rgba(201,168,76,.07) 0%,transparent 60%),
+        radial-gradient(ellipse 30% 50% at 50% 100%,rgba(139,0,0,.1) 0%,transparent 60%),
+        repeating-linear-gradient(90deg,rgba(255,255,255,.011) 0px,rgba(255,255,255,.011) 1px,transparent 1px,transparent 80px),
+        repeating-linear-gradient(0deg,rgba(255,255,255,.011) 0px,rgba(255,255,255,.011) 1px,transparent 1px,transparent 80px);
+    }
+    .about-pre {
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic; font-size:1rem;
+      letter-spacing:7px; color:var(--gold);
+      text-transform:uppercase; position:relative; z-index:1;
+      margin-bottom:28px;
+      display:flex; align-items:center; gap:22px;
+    }
+    .about-pre::before,.about-pre::after {
+      content:''; display:inline-block;
+      width:55px; height:1px;
+    }
+    .about-pre::before { background:linear-gradient(90deg,transparent,var(--gold)); }
+    .about-pre::after  { background:linear-gradient(90deg,var(--gold),transparent); }
+
+    .about-h1 {
+      font-family:'Playfair Display',Georgia,serif;
+      font-weight:900;
+      font-size:clamp(5rem,13vw,11rem);
+      line-height:.85; text-align:center;
+      letter-spacing:-2px;
+      position:relative; z-index:1;
+      color:var(--bone);
+      text-shadow:
+        5px 5px 0 var(--blood),
+        10px 10px 0 rgba(139,0,0,.32),
+        18px 18px 34px rgba(0,0,0,.75),
+        0 0 80px rgba(184,40,42,.14);
+      margin-bottom:36px;
+    }
+    .about-h1 i {
+      font-style:italic; color:var(--ember); display:block;
+      text-shadow:4px 4px 0 var(--blood),9px 9px 0 rgba(139,0,0,.28),0 0 60px rgba(184,40,42,.28);
+    }
+    .about-rule {
+      display:flex; align-items:center; gap:16px;
+      margin-bottom:36px; position:relative; z-index:1;
+    }
+    .arl { flex:1; max-width:160px; height:1px; }
+    .arl.l { background:linear-gradient(90deg,transparent,var(--cinder)); }
+    .arl.r { background:linear-gradient(90deg,var(--cinder),transparent); }
+    .about-rule-sym { font-size:1.1rem; color:var(--ember); text-shadow:0 0 12px var(--glow-r); }
+    .about-body {
+      max-width:620px; text-align:center;
+      font-size:1.15rem; line-height:2;
+      color:var(--ash); font-weight:300;
+      position:relative; z-index:1; margin-bottom:70px;
+    }
+    .about-body strong { color:var(--bone); font-weight:400; }
+
+    .about-stats {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      width:100%; max-width:860px;
+      position:relative; z-index:1;
+      border:1px solid var(--cinder);
+      box-shadow:0 0 0 1px rgba(201,168,76,.07),0 24px 80px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.025);
+    }
+    .stat {
+      padding:44px 30px; text-align:center;
+      border-right:1px solid var(--cinder);
+      background:var(--pitch);
+      transition:background .3s; position:relative; overflow:hidden;
+    }
+    .stat::before {
+      content:''; position:absolute;
+      top:0; left:0; right:0; height:2px;
+      background:linear-gradient(90deg,transparent,var(--ember),transparent);
+      opacity:0; transition:opacity .3s;
+    }
+    .stat:hover { background:var(--void); }
+    .stat:hover::before { opacity:1; }
+    .stat:last-child { border-right:none; }
+    .stat-num {
+      font-family:'Playfair Display',serif;
+      font-size:3.8rem; font-weight:900;
+      color:var(--ember); line-height:1; display:block;
+      text-shadow:3px 3px 0 var(--blood),0 0 30px rgba(184,40,42,.38);
+    }
+    .stat-label {
+      font-family:'Oswald',sans-serif;
+      font-size:.6rem; letter-spacing:5px;
+      color:var(--gold); text-transform:uppercase;
+      margin:10px 0 8px; display:block;
+    }
+    .stat-sub {
+      font-size:.8rem; color:var(--smoke);
+      line-height:1.6; font-style:italic;
+    }
+
+    /* ── SECTION HEADER ── */
+    .sec-head {
+      padding:70px 60px 50px;
+      display:flex; align-items:flex-end; gap:30px;
+    }
+    .sec-head-text { flex-shrink:0; }
+    .sec-pre {
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic; font-size:.85rem;
+      letter-spacing:5px; color:var(--gold);
+      text-transform:uppercase; display:block; margin-bottom:8px;
+    }
+    .sec-title {
+      font-family:'Playfair Display',serif;
+      font-size:3.8rem; font-weight:900; color:var(--bone);
+      line-height:1;
+      text-shadow:4px 4px 0 var(--blood),8px 8px 20px rgba(0,0,0,.6);
+    }
+    .sec-title em { font-style:italic; color:var(--ember); }
+    .sec-rule { flex:1; height:1px; background:linear-gradient(90deg,var(--cinder),transparent); margin-bottom:10px; }
+    .sec-count {
+      flex-shrink:0;
+      font-family:'Oswald',sans-serif;
+      font-size:.62rem; letter-spacing:4px;
+      color:var(--smoke); text-transform:uppercase; margin-bottom:10px;
+    }
+
+    /* ── GRID ── */
+    .grid-wrap {
+      padding:0 60px 100px;
+      display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
+    }
+    .card {
+      background:var(--pitch); cursor:pointer;
+      position:relative; overflow:hidden;
+      border:1px solid rgba(255,255,255,.03);
+      transition:border-color .35s,box-shadow .35s,transform .3s;
+    }
+    .card::after {
+      content:''; position:absolute; inset:0;
+      border:1px solid rgba(201,168,76,0);
+      pointer-events:none; transition:border-color .35s; z-index:3;
+    }
+    .card:hover {
+      border-color:rgba(201,168,76,.18);
+      box-shadow:0 0 0 1px rgba(201,168,76,.12),0 30px 80px rgba(0,0,0,.9),inset 0 0 60px rgba(139,0,0,.06);
+      transform:translateY(-5px); z-index:10;
+    }
+    .card:hover::after { border-color:rgba(201,168,76,.22); }
+
+    .card-overlay {
+      position:absolute; inset:0; z-index:5;
+      background:linear-gradient(160deg,rgba(139,0,0,.88),rgba(6,6,6,.92));
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:12px;
+      opacity:0; transition:opacity .3s;
+    }
+    .card:hover .card-overlay { opacity:1; }
+    .ov-label {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:2rem; letter-spacing:8px;
+      color:var(--bone); text-shadow:2px 2px 0 var(--blood);
+    }
+    .ov-sub {
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic; font-size:.85rem;
+      letter-spacing:3px; color:var(--gold);
+    }
+
+    /* ── CARD VISUAL: real image version ── */
+    .card-visual {
+      width:100%; aspect-ratio:3/4;
+      position:relative; overflow:hidden;
+      background:var(--void);
+    }
+    .card-visual.sq { aspect-ratio:1/1; }
+
+    .card-visual img {
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+      transition:transform .6s cubic-bezier(.25,.46,.45,.94), filter .4s;
+      filter:saturate(.85) contrast(1.05);
+    }
+    .card:hover .card-visual img {
+      transform:scale(1.06);
+      filter:saturate(1) contrast(1.08);
+    }
+
+    /* dark vignette over image */
+    .card-visual::after {
+      content:'';
+      position:absolute; inset:0;
+      background:linear-gradient(to bottom, transparent 50%, rgba(6,6,6,.65) 100%);
+      pointer-events:none;
+      z-index:1;
+    }
+
+    .card-band {
+      position:absolute; top:20px; left:-8px;
+      background:var(--ember);
+      padding:5px 18px 5px 22px;
+      font-family:'Oswald',sans-serif;
+      font-size:.55rem; letter-spacing:4px;
+      color:#fff; text-transform:uppercase;
+      box-shadow:3px 3px 10px rgba(0,0,0,.5);
+      clip-path:polygon(0 0,100% 0,calc(100% - 9px) 50%,100% 100%,0 100%);
+      z-index:4;
+    }
+
+    .card-info {
+      padding:26px 28px 30px;
+      border-top:1px solid var(--smolder);
+      position:relative;
+    }
+    .card-info::before {
+      content:''; position:absolute;
+      top:0; left:28px; width:28px; height:2px;
+      background:linear-gradient(90deg,var(--ember),var(--blood));
+    }
+    .card-name {
+      font-family:'Playfair Display',serif;
+      font-weight:700; font-size:1.1rem;
+      color:var(--bone); margin-bottom:8px;
+      text-shadow:1px 1px 0 rgba(0,0,0,.5);
+    }
+    .card-desc {
+      font-size:.82rem; color:var(--smoke);
+      line-height:1.65; margin-bottom:16px; font-style:italic;
+    }
+    .card-foot { display:flex; align-items:center; justify-content:space-between; }
+    .card-price {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:1.7rem; letter-spacing:2px;
+      color:var(--ember);
+      text-shadow:2px 2px 0 var(--blood);
+    }
+    .card-arrow {
+      width:34px; height:34px;
+      border:1px solid var(--cinder);
+      display:flex; align-items:center; justify-content:center;
+      font-size:.85rem; color:var(--smoke);
+      transition:all .25s;
+    }
+    .card:hover .card-arrow { border-color:var(--gold); color:var(--gold); background:rgba(201,168,76,.08); }
+
+    /* ── DETAIL ── */
+    #page-detail { min-height:calc(100vh - 130px); }
+    .detail-wrap {
+      display:grid; grid-template-columns:52% 1fr;
+      min-height:calc(100vh - 130px);
+    }
+    .detail-visual {
+      background:var(--pitch);
+      border-right:1px solid var(--smolder);
+      display:flex; align-items:center; justify-content:center;
+      padding:80px; position:relative; overflow:hidden;
+    }
+    .detail-visual::before {
+      content:''; position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse 70% 60% at 30% 40%,rgba(139,0,0,.12) 0%,transparent 60%),
+        radial-gradient(ellipse 50% 50% at 70% 80%,rgba(201,168,76,.05) 0%,transparent 60%);
+    }
+
+    /* Detail frame with real image */
+    .detail-frame {
+      width:100%; max-width:420px; aspect-ratio:3/4;
+      background:var(--void);
+      border:1px solid var(--cinder);
+      position:relative; overflow:hidden;
+      box-shadow:20px 20px 0 var(--smolder),40px 40px 0 rgba(139,0,0,.08),0 40px 100px rgba(0,0,0,.8);
+    }
+    .detail-frame.sq { aspect-ratio:1/1; }
+    .detail-frame img {
+      width:100%; height:100%;
+      object-fit:cover; display:block;
+      filter:saturate(.9) contrast(1.06);
+    }
+    .detail-frame::before {
+      content:''; position:absolute; inset:0;
+      border:1px solid rgba(201,168,76,.15); pointer-events:none; z-index:2;
+    }
+    .dcorner {
+      position:absolute; width:20px; height:20px;
+      border-color:var(--gold); border-style:solid; opacity:.55; z-index:3;
+    }
+    .dcorner.tl{top:12px;left:12px;border-width:1px 0 0 1px}
+    .dcorner.tr{top:12px;right:12px;border-width:1px 1px 0 0}
+    .dcorner.bl{bottom:12px;left:12px;border-width:0 0 1px 1px}
+    .dcorner.br{bottom:12px;right:12px;border-width:0 1px 1px 0}
+
+    .detail-info {
+      padding:80px 70px;
+      display:flex; flex-direction:column; justify-content:center;
+      background:var(--ink);
+    }
+    .detail-back {
+      display:inline-flex; align-items:center; gap:10px;
+      font-family:'Oswald',sans-serif;
+      font-size:.6rem; letter-spacing:5px;
+      color:var(--smoke); text-transform:uppercase;
+      cursor:pointer; border:none; background:none; padding:0;
+      margin-bottom:50px; transition:color .2s;
+    }
+    .detail-back:hover { color:var(--gold); }
+    .back-line {
+      display:inline-block; width:24px; height:1px;
+      background:currentColor; transition:width .25s;
+    }
+    .detail-back:hover .back-line { width:42px; }
+    .detail-cat {
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic; font-size:.85rem;
+      letter-spacing:5px; color:var(--gold);
+      text-transform:uppercase; margin-bottom:16px;
+    }
+    .detail-title {
+      font-family:'Playfair Display',serif;
+      font-weight:900; font-size:3.2rem; line-height:1;
+      color:var(--bone); letter-spacing:-.5px; margin-bottom:28px;
+      text-shadow:4px 4px 0 var(--blood),8px 8px 20px rgba(0,0,0,.7);
+    }
+    .detail-deco {
+      display:flex; align-items:center; gap:14px; margin-bottom:30px;
+    }
+    .dd-line { height:1px; width:50px; background:var(--ember); }
+    .dd-sym { color:var(--ember); font-size:.8rem; }
+    .dd-line2 { height:1px; flex:1; background:linear-gradient(90deg,var(--smolder),transparent); }
+    .detail-desc {
+      font-size:1.05rem; line-height:1.95;
+      color:var(--ash); font-weight:300; margin-bottom:36px;
+    }
+    .detail-meta {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:2px; margin-bottom:40px;
+      border:1px solid var(--smolder);
+    }
+    .meta-cell { padding:16px 20px; background:var(--pitch); }
+    .meta-key {
+      font-family:'Oswald',sans-serif;
+      font-size:.55rem; letter-spacing:4px;
+      color:var(--smoke); text-transform:uppercase; display:block; margin-bottom:4px;
+    }
+    .meta-val {
+      font-family:'Cormorant Garamond',serif;
+      font-size:.9rem; color:var(--ash);
+    }
+    .detail-price {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:4rem; letter-spacing:4px;
+      color:var(--ember); line-height:1; margin-bottom:40px;
+      text-shadow:4px 4px 0 var(--blood),0 0 40px rgba(184,40,42,.28);
+    }
+    .order-btn {
+      display:inline-flex; align-items:center; gap:16px;
+      background:var(--ember); color:#fff;
+      font-family:'Oswald',sans-serif;
+      font-weight:700; font-size:.8rem; letter-spacing:6px;
+      text-transform:uppercase; padding:22px 44px;
+      text-decoration:none; cursor:pointer; border:none;
+      position:relative; overflow:hidden; transition:all .3s;
+      box-shadow:4px 4px 0 var(--blood),8px 8px 0 rgba(139,0,0,.28),0 20px 60px rgba(184,40,42,.28);
+    }
+    .order-btn::before {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.1) 50%,transparent 100%);
+      transform:translateX(-100%); transition:transform .5s;
+    }
+    .order-btn:hover::before { transform:translateX(100%); }
+    .order-btn:hover {
+      background:var(--crimson);
+      box-shadow:4px 4px 0 var(--blood),8px 8px 0 rgba(139,0,0,.45),0 30px 80px rgba(184,40,42,.48);
+      transform:translateY(-2px);
+    }
+    .btn-icon { font-size:1.3rem; }
+
+    /* ── CAROUSEL ── */
+    .carousel {
+      position:relative; width:100%; height:88vh; min-height:520px;
+      overflow:hidden; background:var(--ink);
+    }
+    .carousel-track {
+      display:flex; height:100%;
+      transition:transform .9s cubic-bezier(.77,0,.18,1); will-change:transform;
+    }
+    .carousel-slide { flex:0 0 100%; height:100%; position:relative; overflow:hidden; }
+    .carousel-slide-bg {
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      transition:transform 1.2s cubic-bezier(.25,.46,.45,.94);
+    }
+    .carousel-slide:hover .carousel-slide-bg { transform:scale(1.04); }
+    .carousel-slide::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(160deg,rgba(6,6,6,.72) 0%,rgba(6,6,6,.3) 50%,rgba(6,6,6,.75) 100%);
+      pointer-events:none;
+    }
+    .slide-content {
+      position:absolute; bottom:0; left:0; right:0;
+      padding:0 80px 70px; z-index:2;
+      display:flex; align-items:flex-end; justify-content:space-between; gap:40px;
+    }
+    .slide-num {
+      font-family:'Oswald',sans-serif;
+      font-size:.6rem; letter-spacing:6px;
+      color:var(--gold); text-transform:uppercase;
+      margin-bottom:12px; display:block;
+    }
+    .slide-title {
+      font-family:'Playfair Display',serif;
+      font-weight:900; font-size:clamp(2.6rem,5vw,4.2rem); line-height:.95;
+      color:var(--bone); text-shadow:3px 3px 0 var(--blood),6px 6px 16px rgba(0,0,0,.8);
+      margin-bottom:14px;
+    }
+    .slide-title em { font-style:italic; color:var(--ember); }
+    .slide-sub {
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic; font-size:1.05rem; letter-spacing:2px;
+      color:var(--ash); max-width:480px; line-height:1.7;
+    }
+    .slide-tag {
+      flex-shrink:0;
+      font-family:'Bebas Neue',sans-serif;
+      font-size:1rem; letter-spacing:6px;
+      color:var(--ember); border:1px solid var(--ember);
+      padding:12px 24px; text-transform:uppercase; align-self:flex-end;
+      white-space:nowrap; box-shadow:3px 3px 0 var(--blood);
+    }
+    .carousel-counter {
+      position:absolute; left:28px; top:50%; transform:translateY(-50%);
+      z-index:5; display:flex; flex-direction:column; gap:10px;
+    }
+    .c-dot {
+      width:6px; height:6px; border-radius:50%;
+      background:rgba(232,223,208,.25); cursor:pointer;
+      transition:all .4s; border:1px solid transparent;
+    }
+    .c-dot.active {
+      background:var(--ember); box-shadow:0 0 8px var(--glow-r);
+      border-color:rgba(184,40,42,.4); transform:scale(1.4);
+    }
+    .c-arrow {
+      position:absolute; top:50%; transform:translateY(-50%); z-index:5;
+      width:52px; height:52px; border:1px solid rgba(232,223,208,.18);
+      background:rgba(6,6,6,.55); backdrop-filter:blur(6px);
+      color:var(--bone); font-size:1.1rem; cursor:pointer;
+      display:flex; align-items:center; justify-content:center; transition:all .25s;
+    }
+    .c-arrow:hover { border-color:var(--gold); color:var(--gold); background:rgba(6,6,6,.85); box-shadow:0 0 20px rgba(201,168,76,.2); }
+    .c-arrow.prev { left:60px; }
+    .c-arrow.next { right:60px; }
+    .c-progress {
+      position:absolute; bottom:0; left:0; height:2px;
+      background:linear-gradient(90deg,var(--blood),var(--crimson),var(--gold));
+      z-index:5; width:0%; transition:width .1s linear;
+    }
+    .c-slide-badge {
+      position:absolute; top:36px; right:60px; z-index:5;
+      font-family:'Bebas Neue',sans-serif;
+      font-size:1rem; letter-spacing:4px; color:rgba(232,223,208,.35);
+    }
+    .c-slide-badge span { color:var(--bone); font-size:1.6rem; }
+
+    /* FOOTER */
+    footer {
+      background:var(--pitch); border-top:1px solid var(--smolder);
+      padding:28px 60px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .footer-logo { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:8px; color:var(--cinder); }
+    .footer-logo em { color:var(--blood); font-style:normal; }
+    .footer-copy { font-family:'Oswald',sans-serif; font-size:.55rem; letter-spacing:4px; color:var(--cinder); text-transform:uppercase; }
+    .footer-skull { color:var(--blood); font-size:.9rem; opacity:.45; }
+
+    /* STAGGER */
+    .page.active .card { animation:cardin .5s ease both; }
+    .page.active .card:nth-child(1){animation-delay:.05s}
+    .page.active .card:nth-child(2){animation-delay:.12s}
+    .page.active .card:nth-child(3){animation-delay:.19s}
+    .page.active .card:nth-child(4){animation-delay:.26s}
+    .page.active .card:nth-child(5){animation-delay:.33s}
+    .page.active .card:nth-child(6){animation-delay:.40s}
+    .page.active .card:nth-child(7){animation-delay:.47s}
+    .page.active .card:nth-child(8){animation-delay:.54s}
+    .page.active .card:nth-child(9){animation-delay:.61s}
+    .page.active .card:nth-child(10){animation-delay:.68s}
+    @keyframes cardin {
+      from{opacity:0;transform:translateY(26px) scale(.97)}
+      to  {opacity:1;transform:none}
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:1024px){
+      .grid-wrap{grid-template-columns:repeat(2,1fr)}
+      .detail-wrap{grid-template-columns:1fr}
+      .detail-visual{min-height:50vh}
+    }
+    @media(max-width:700px){
+      .header-top{padding:0 24px}
+      nav a{padding:12px 18px;font-size:.6rem;letter-spacing:3px}
+      .sec-head,.grid-wrap{padding-left:24px;padding-right:24px}
+      .grid-wrap{grid-template-columns:1fr}
+      .about-stats{grid-template-columns:1fr}
+      .about-hero{padding:60px 24px}
+      .detail-info{padding:50px 30px}
+      .detail-visual{padding:40px}
+      .about-h1{font-size:clamp(3.5rem,18vw,7rem)}
+      footer{flex-direction:column;gap:12px;text-align:center;padding:24px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <div onclick="showPage('about')" class="logo">
+      ILLUSTRA<em>13</em>
+      <span class="header-badge">Est. 2009 — Underground Couture</span>
+    </div>
+    <div class="header-right">
+      <span class="header-tag">Made in Darkness</span>
+      <div class="live-dot">
+        <div class="dot"></div>
+        <span class="live-txt">New Drop Available</span>
+      </div>
+    </div>
+  </div>
+  <div class="nav-strip">
+    <nav>
+      <a onclick="showPage('about')" id="nav-about" class="active">About Us</a>
+      <a onclick="showPage('apparel')" id="nav-apparel">Apparel</a>
+      <a onclick="showPage('design')" id="nav-design">Design</a>
+    </nav>
+  </div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>Limited Edition Drops</span>
+    <span>Handcrafted Darkness</span>
+    <span>Underground Since 2009</span>
+    <span>No Compromises</span>
+    <span>Order via WhatsApp</span>
+    <span>Free Shipping Over $150</span>
+    <span>Limited Edition Drops</span>
+    <span>Handcrafted Darkness</span>
+    <span>Underground Since 2009</span>
+    <span>No Compromises</span>
+    <span>Order via WhatsApp</span>
+    <span>Free Shipping Over $150</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="page active" id="page-about">
+
+  <!-- CAROUSEL -->
+  <div class="carousel" id="carousel">
+    <div class="carousel-track" id="c-track">
+
+      <div class="carousel-slide">
+        <div class="carousel-slide-bg" style="background:radial-gradient(ellipse 80% 80% at 60% 40%,#1a0505 0%,#060606 70%)">
+          <svg width="100%" height="100%" viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;opacity:.55">
+            <ellipse cx="720" cy="360" rx="260" ry="280" stroke="#8b0000" stroke-width="1.5" fill="rgba(139,0,0,0.04)"/>
+            <ellipse cx="650" cy="320" rx="55" ry="65" fill="rgba(139,0,0,0.15)" stroke="#b8282a" stroke-width="1.5"/>
+            <ellipse cx="790" cy="320" rx="55" ry="65" fill="rgba(139,0,0,0.15)" stroke="#b8282a" stroke-width="1.5"/>
+            <path d="M680 420 Q720 400 760 420 L755 455 Q720 470 685 455Z" fill="rgba(139,0,0,0.2)" stroke="#8b0000" stroke-width="1"/>
+            <line x1="0" y1="410" x2="380" y2="410" stroke="rgba(139,0,0,0.2)" stroke-width="1"/>
+            <line x1="1060" y1="410" x2="1440" y2="410" stroke="rgba(139,0,0,0.2)" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="slide-content">
+          <div class="slide-text">
+            <span class="slide-num">01 / 05 — Collection 2024</span>
+            <div class="slide-title">Illustra<br><em>13</em></div>
+            <div class="slide-sub">Where underground culture meets high craft. Every piece tells a story of defiance.</div>
+          </div>
+          <div class="slide-tag">Shop Now</div>
+        </div>
+      </div>
+
+      <div class="carousel-slide">
+        <div class="carousel-slide-bg" style="background:radial-gradient(ellipse 100% 80% at 30% 60%,#0a0018 0%,#060606 65%)">
+          <svg width="100%" height="100%" viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid slice" fill="none" style="position:absolute;inset:0;opacity:.5">
+            <path d="M440 150 Q560 80 720 100 Q880 80 1000 150 L1060 280 L940 300 L940 680 L500 680 L500 300 L380 280Z" stroke="#b8282a" stroke-width="2" fill="rgba(139,0,0,0.06)"/>
+            <ellipse cx="720" cy="108" rx="90" ry="55" stroke="#b8282a" stroke-width="1.5" fill="none"/>
+            <path d="M540 370 Q580 350 620 370 Q660 390 700 370 Q740 350 780 370 Q820 390 860 370 Q900 350 940 370" stroke="rgba(201,168,76,0.35)" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="slide-content">
+          <div class="slide-text">
+            <span class="slide-num">02 / 05 — Heavyweight Series</span>
+            <div class="slide-title">Chain<br><em>Gang</em></div>
+            <div class="slide-sub">380gsm French terry. Embroidered chain across the chest. Built heavy, worn heavier.</div>
+          </div>
+          <div class="slide-tag">New Drop</div>
+        </div>
+      </div>
+
+      <div class="carousel-slide">
+        <div class="carousel-slide-bg" style="background:radial-gradient(ellipse 80% 100% at 70% 50%,#0a0800 0%,#060606 65%)">
+          <svg width="100%" height="100%" viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid slice" fill="none" style="position:absolute;inset:0;opacity:.5">
+            <path d="M200 750 Q320 620 500 540 Q680 460 780 340 Q880 220 820 120 Q760 40 680 60 Q600 80 560 180 Q520 280 440 340 Q320 420 280 540 Q240 660 320 730 Q400 800 500 760" stroke="#b8282a" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="slide-content">
+          <div class="slide-text">
+            <span class="slide-num">03 / 05 — Artwork Series</span>
+            <div class="slide-title">Serpent<br><em>Wrap</em></div>
+            <div class="slide-sub">Blackwork illustration. Full wraparound design. Pure menace on canvas and cloth.</div>
+          </div>
+          <div class="slide-tag">Bestseller</div>
+        </div>
+      </div>
+
+      <div class="carousel-slide">
+        <div class="carousel-slide-bg" style="background:radial-gradient(ellipse 80% 80% at 50% 30%,#100500 0%,#060606 65%)">
+          <svg width="100%" height="100%" viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid slice" fill="none" style="position:absolute;inset:0;opacity:.5">
+            <path d="M280 200 L520 100 L720 115 L920 100 L1160 200 L1200 450 L1020 470 L1020 730 L420 730 L420 470 L240 450Z" stroke="#b8282a" stroke-width="2" fill="rgba(139,0,0,0.07)"/>
+            <line x1="720" y1="115" x2="720" y2="730" stroke="#b8282a" stroke-width="1.5"/>
+            <ellipse cx="720" cy="440" rx="80" ry="85" stroke="#b8282a" stroke-width="1.5" fill="rgba(139,0,0,0.1)"/>
+          </svg>
+        </div>
+        <div class="slide-content">
+          <div class="slide-text">
+            <span class="slide-num">04 / 05 — Outerwear</span>
+            <div class="slide-title">Skull<br><em>Coach</em></div>
+            <div class="slide-sub">Nylon shell. Satin lined. Embroidered skull on back. The statement piece of the collection.</div>
+          </div>
+          <div class="slide-tag">Exclusive</div>
+        </div>
+      </div>
+
+      <div class="carousel-slide">
+        <div class="carousel-slide-bg" style="background:radial-gradient(ellipse 70% 90% at 40% 60%,#050012 0%,#060606 65%)">
+          <svg width="100%" height="100%" viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid slice" fill="none" style="position:absolute;inset:0;opacity:.5">
+            <circle cx="720" cy="380" r="300" stroke="#b8282a" stroke-width="1.5" fill="rgba(139,0,0,0.05)"/>
+            <circle cx="720" cy="380" r="240" stroke="rgba(184,40,42,0.3)" stroke-width="1" fill="rgba(139,0,0,0.04)"/>
+            <circle cx="720" cy="380" r="180" stroke="rgba(184,40,42,0.2)" stroke-width="1" fill="rgba(139,0,0,0.06)"/>
+            <circle cx="200" cy="100" r="2" fill="rgba(201,168,76,0.4)"/>
+            <circle cx="1100" cy="80" r="2" fill="rgba(201,168,76,0.4)"/>
+            <line x1="0" y1="680" x2="1440" y2="680" stroke="rgba(139,0,0,0.2)" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="slide-content">
+          <div class="slide-text">
+            <span class="slide-num">05 / 05 — Signature Print</span>
+            <div class="slide-title">Blood<br><em>Moon</em></div>
+            <div class="slide-sub">The flagship illustration. Hand-drawn ink. Available as print or applied to any garment.</div>
+          </div>
+          <div class="slide-tag">Signature</div>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="c-arrow prev" id="c-prev" aria-label="Previous">&#8592;</button>
+    <button class="c-arrow next" id="c-next" aria-label="Next">&#8594;</button>
+    <div class="carousel-counter" id="c-dots"></div>
+    <div class="c-slide-badge"><span id="c-cur">1</span> / 5</div>
+    <div class="c-progress" id="c-prog"></div>
+  </div>
+
+  <div class="about-hero">
+    <div class="about-bg"></div>
+    <div class="about-pre">The Brand</div>
+    <h1 class="about-h1">Illustra<br><i>13</i></h1>
+    <div class="about-rule">
+      <div class="arl l"></div>
+      <div class="about-rule-sym">☠</div>
+      <div class="arl r"></div>
+    </div>
+    <p class="about-body">
+      1llustra13 was <strong>forged underground</strong> — built for those who move against the grain.
+      Every stitch, every print, every silhouette is a statement of defiance against the ordinary.
+      <br><br>We don't follow trends. <strong>We bury them.</strong>
+    </p>
+    <div class="about-stats">
+      <div class="stat">
+        <span class="stat-num">5++</span>
+        <span class="stat-label">Years Running</span>
+        <div class="stat-sub">Born underground, still underground.</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Independent</span>
+        <div class="stat-sub">No investors. No compromises. No apologies.</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">Limited Drops</span>
+        <div class="stat-sub">Every piece runs limited. Own it or miss it.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APPAREL -->
+<div class="page" id="page-apparel">
+  <div class="sec-head">
+    <div class="sec-head-text">
+      <span class="sec-pre">— Collection —</span>
+      <div class="sec-title">Appa<em>rel</em></div>
+    </div>
+    <div class="sec-rule"></div>
+    <div class="sec-count">10 Pieces</div>
+  </div>
+  <div class="grid-wrap" id="apparel-grid"></div>
+</div>
+
+<!-- DESIGN -->
+<div class="page" id="page-design">
+  <div class="sec-head">
+    <div class="sec-head-text">
+      <span class="sec-pre">— Artwork —</span>
+      <div class="sec-title">De<em>sign</em></div>
+    </div>
+    <div class="sec-rule"></div>
+    <div class="sec-count">5 Prints</div>
+  </div>
+  <div class="grid-wrap" id="design-grid"></div>
+</div>
+
+<!-- DETAIL -->
+<div class="page" id="page-detail">
+  <div class="detail-wrap">
+    <div class="detail-visual" id="detail-visual-wrap"></div>
+    <div class="detail-info">
+      <button class="detail-back" id="detail-back">
+        <span class="back-line"></span>Back
+      </button>
+      <div class="detail-cat" id="detail-cat"></div>
+      <div class="detail-title" id="detail-title"></div>
+      <div class="detail-deco">
+        <div class="dd-line"></div>
+        <div class="dd-sym">✦</div>
+        <div class="dd-line2"></div>
+      </div>
+      <p class="detail-desc" id="detail-desc"></p>
+      <div class="detail-meta" id="detail-meta"></div>
+      <div class="detail-price" id="detail-price"></div>
+      <a class="order-btn" id="order-btn" target="_blank">
+        <span class="btn-icon">📲</span>Order on WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">ILLUSTRA<em>13</em></div>
+  <div class="footer-copy">© 2024 All Rights Reserved — Darkness Is Our Fabric</div>
+  <div class="footer-skull">☠</div>
+</footer>
+
+<script>
+const WA = '1234567890'; // ← Replace with your WhatsApp number (digits only)
+
+/* ─────────────────────────────────────────────
+   APPAREL DATA — 10 items using real image paths
+───────────────────────────────────────────── */
+const APPAREL = [
+  { id:'a1', type:'apparel', tag:'Bestseller',
+    img:'./apparel/tshirt1.jpeg',
+    name:'Reaper Oversized Tee',
+    desc:'Heavy 280gsm cotton. Washed black. Reaper graphic screen-printed front & back. Relaxed drop-shoulder cut built for the streets.',
+    price:'$48',
+    meta:[['Material','280gsm Cotton'],['Fit','Drop Shoulder'],['Wash','Stone Washed'],['Print','Screen Print']]
+  },
+  { id:'a2', type:'apparel', tag:'New Drop',
+    img:'./apparel/tshirt2.jpeg',
+    name:'Chain Gang Hoodie',
+    desc:'French terry fleece 380gsm. Embroidered chain motif across chest. Kangaroo pocket. Ribbed cuffs. Premium heavyweight build.',
+    price:'$85',
+    meta:[['Material','380gsm Fleece'],['Fit','Oversized'],['Detail','Embroidered'],['Pockets','Kangaroo']]
+  },
+  { id:'a3', type:'apparel', tag:'Limited',
+    img:'./apparel/tshirt3.jpeg',
+    name:'Void Cargo Pants',
+    desc:'100% ripstop nylon. 8 utility pockets. Adjustable ankle cuffs. Charcoal fade wash. Tactical silhouette — built to move.',
+    price:'$120',
+    meta:[['Material','Ripstop Nylon'],['Pockets','8 Total'],['Waist','Elastic Draw'],['Wash','Charcoal Fade']]
+  },
+  { id:'a4', type:'apparel', tag:'Exclusive',
+    img:'./apparel/tshirt4.jpeg',
+    name:'Skull Coach Jacket',
+    desc:'Nylon shell. Full satin lining. Embroidered skull on back. Ribbed cuffs and collar. Snap buttons. The ultimate statement piece.',
+    price:'$165',
+    meta:[['Shell','Nylon'],['Lining','Full Satin'],['Back','Embroidered'],['Close','Snap Buttons']]
+  },
+  { id:'a5', type:'apparel', tag:'',
+    img:'./apparel/tshirt5.jpeg',
+    name:'Eclipse Long Sleeve',
+    desc:'Waffle knit texture. Contrast tonal print. Thumbhole cuffs. Slim athletic cut. Refined minimalism with dark intent.',
+    price:'$62',
+    meta:[['Material','Waffle Knit'],['Fit','Slim Athletic'],['Detail','Thumbhole Cuffs'],['Print','Tonal']]
+  },
+  { id:'a6', type:'apparel', tag:'Summer Drop',
+    img:'./apparel/tshirt6.jpeg',
+    name:'War Paint Shorts',
+    desc:'Military-grade canvas. Double stitched seams. Cargo side pockets. Drawstring elastic waist. Built for battle.',
+    price:'$70',
+    meta:[['Material','Canvas'],['Seams','Double Stitch'],['Pockets','4 Cargo'],['Waist','Drawstring']]
+  },
+  { id:'a7', type:'apparel', tag:'',
+    img:'./apparel/tshirt7.jpeg',
+    name:'Phantom Longtee',
+    desc:'240gsm heavyweight jersey. Garment-dyed in obsidian black. Extended back hem. A ghost you can wear.',
+    price:'$55',
+    meta:[['Material','240gsm Jersey'],['Fit','Extended Hem'],['Dye','Garment Dyed'],['Color','Obsidian']]
+  },
+  { id:'a8', type:'apparel', tag:'New',
+    img:'./apparel/tshirt8.jpeg',
+    name:'Iron Veil Bomber',
+    desc:'Satin bomber with custom lining print. Woven label at collar. Embroidered crest on chest. Limited to 50 units worldwide.',
+    price:'$195',
+    meta:[['Shell','Satin'],['Lining','Full Print'],['Edition','Ltd. 50'],['Label','Woven']]
+  },
+  { id:'a9', type:'apparel', tag:'',
+    img:'./apparel/tshirt9.jpeg',
+    name:'Dagger Crop Tee',
+    desc:'Crop-cut 220gsm ring-spun cotton. Dagger print at chest. Raw hem edge. Unisex fit — wear it cut or not.',
+    price:'$44',
+    meta:[['Material','220gsm Ring-Spun'],['Fit','Crop / Unisex'],['Hem','Raw Cut'],['Print','DTF']]
+  },
+  { id:'a10', type:'apparel', tag:'Signature',
+    img:'./apparel/tshirt10.jpeg',
+    name:'Ghost Lady Signature Tee',
+    desc:'The icon piece. Traditional tattoo flash printed on 180gsm combed cotton. Ghost smoke, roses, and dark beauty in one design.',
+    price:'$58',
+    meta:[['Material','180gsm Cotton'],['Fit','Regular'],['Print','DTF'],['Art','Original Flash']]
+  },
+];
+
+/* ─────────────────────────────────────────────
+   DESIGN DATA — 5 items using real image paths
+───────────────────────────────────────────── */
+const DESIGN = [
+  { id:'d1', type:'design', tag:'Signature',
+    img:'./design/design1.jpeg',
+    name:'Ghost Lady Flash',
+    desc:'The founding illustration. Traditional tattoo flash featuring a dark beauty, ghost smoke, and roses. Hand-drawn, digitally finished.',
+    price:'From $25',
+    meta:[['Style','Tattoo Flash'],['Use','Print / Garment'],['Edition','Open'],['Signed','On Request']]
+  },
+  { id:'d2', type:'design', tag:'',
+    img:'./design/design2.jpeg',
+    name:'Blood Moon Print',
+    desc:'Hand-drawn ink illustration. Circular composition with moon phase detail. Available as fine art print or custom garment application.',
+    price:'From $25',
+    meta:[['Style','Ink Illustration'],['Use','Print / Garment'],['Edition','Open'],['Signed','On Request']]
+  },
+  { id:'d3', type:'design', tag:'Bestseller',
+    img:'./design/design3.jpeg',
+    name:'Serpent Wrap',
+    desc:'Full wraparound snake illustration in blackwork style. Designed to flow around sleeves or torso. Pure menace in every line.',
+    price:'From $35',
+    meta:[['Style','Blackwork'],['Placement','Sleeve / Body'],['Edition','Open'],['Colors','Black']]
+  },
+  { id:'d4', type:'design', tag:'Limited',
+    img:'./design/design4.jpeg',
+    name:'Iron Cross Crest',
+    desc:'Gothic symmetrical crest. Heritage military influence. Perfect for chest or sleeve placement. Red and black only.',
+    price:'From $20',
+    meta:[['Style','Gothic Crest'],['Placement','Chest / Sleeve'],['Edition','Limited 50'],['Colors','Black & Red']]
+  },
+  { id:'d5', type:'design', tag:'New',
+    img:'./design/design5.jpeg',
+    name:'Death Clock',
+    desc:'Memento Mori pocket watch with skeletal hands. Tattoo-inspired linework. Time is the only currency that runs out.',
+    price:'From $22',
+    meta:[['Style','Tattoo Flash'],['Placement','Chest / Arm'],['Edition','Open'],['Colors','Black & Red']]
+  },
+];
+
+/* ─────────────────────────────────────────────
+   BUILD GRID
+───────────────────────────────────────────── */
+function buildGrid(data, containerId, isDesign) {
+  const wrap = document.getElementById(containerId);
+  wrap.innerHTML = '';
+  data.forEach(item => {
+    const d = document.createElement('div');
+    d.className = 'card';
+    d.onclick = () => showDetail(item, isDesign);
+    d.innerHTML = `
+      <div class="card-overlay">
+        <div class="ov-label">View Piece</div>
+        <div class="ov-sub">— Click to Explore —</div>
+      </div>
+      ${item.tag ? `<div class="card-band">${item.tag}</div>` : ''}
+      <div class="card-visual${isDesign ? ' sq' : ''}">
+        <img
+          src="${item.img}"
+          alt="${item.name}"
+          loading="lazy"
+          onerror="this.parentElement.style.background='#111';this.style.display='none';"
+        />
+      </div>
+      <div class="card-info">
+        <div class="card-name">${item.name}</div>
+        <div class="card-desc">${item.desc}</div>
+        <div class="card-foot">
+          <div class="card-price">${item.price}</div>
+          <div class="card-arrow">→</div>
+        </div>
+      </div>`;
+    wrap.appendChild(d);
+  });
+}
+
+buildGrid(APPAREL, 'apparel-grid', false);
+buildGrid(DESIGN, 'design-grid', true);
+
+/* ─────────────────────────────────────────────
+   NAVIGATION
+───────────────────────────────────────────── */
+function showPage(p) {
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(x => x.classList.remove('active'));
+  document.getElementById('page-' + p).classList.add('active');
+  const nav = document.getElementById('nav-' + p);
+  if (nav) nav.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ─────────────────────────────────────────────
+   DETAIL VIEW
+───────────────────────────────────────────── */
+function showDetail(item, isDesign) {
+  const visualWrap = document.getElementById('detail-visual-wrap');
+  visualWrap.innerHTML = `
+    <div class="detail-frame${isDesign ? ' sq' : ''}">
+      <div class="dcorner tl"></div>
+      <div class="dcorner tr"></div>
+      <div class="dcorner bl"></div>
+      <div class="dcorner br"></div>
+      <img
+        src="${item.img}"
+        alt="${item.name}"
+        onerror="this.style.opacity='0.1';"
+      />
+    </div>`;
+
+  document.getElementById('detail-cat').textContent   = isDesign ? '— Artwork & Design —' : '— Apparel Collection —';
+  document.getElementById('detail-title').textContent = item.name;
+  document.getElementById('detail-desc').textContent  = item.desc;
+  document.getElementById('detail-price').textContent = item.price;
+
+  document.getElementById('detail-meta').innerHTML =
+    (item.meta || []).map(([k, v]) =>
+      `<div class="meta-cell"><span class="meta-key">${k}</span><span class="meta-val">${v}</span></div>`
+    ).join('');
+
+  const msg = encodeURIComponent(`Hello! I'd like to order: *${item.name}* — ${item.price}`);
+  document.getElementById('order-btn').href = `https://wa.me/${WA}?text=${msg}`;
+  document.getElementById('detail-back').onclick = () => showPage(isDesign ? 'design' : 'apparel');
+
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(x => x.classList.remove('active'));
+  document.getElementById('page-detail').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ─────────────────────────────────────────────
+   CAROUSEL
+───────────────────────────────────────────── */
+(function () {
+  const TOTAL = 5;
+  const DELAY = 5000;
+  const track    = document.getElementById('c-track');
+  const dotsWrap = document.getElementById('c-dots');
+  const curEl    = document.getElementById('c-cur');
+  const prog     = document.getElementById('c-prog');
+  let current = 0;
+  let timer, progTimer, progVal = 0;
+
+  for (let i = 0; i < TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'c-dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsWrap.appendChild(d);
+  }
+
+  function updateDots() {
+    document.querySelectorAll('.c-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    curEl.textContent = current + 1;
+  }
+
+  function goTo(n) {
+    current = (n + TOTAL) % TOTAL;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    updateDots();
+    resetProgress();
+  }
+
+  function resetProgress() {
+    clearInterval(progTimer);
+    progVal = 0;
+    prog.style.transition = 'none';
+    prog.style.width = '0%';
+    clearTimeout(timer);
+    progTimer = setInterval(() => {
+      progVal += 100 / (DELAY / 100);
+      prog.style.transition = 'width .1s linear';
+      prog.style.width = Math.min(progVal, 100) + '%';
+      if (progVal >= 100) clearInterval(progTimer);
+    }, 100);
+    timer = setTimeout(() => goTo(current + 1), DELAY);
+  }
+
+  document.getElementById('c-prev').onclick = () => { clearTimeout(timer); clearInterval(progTimer); goTo(current - 1); };
+  document.getElementById('c-next').onclick = () => { clearTimeout(timer); clearInterval(progTimer); goTo(current + 1); };
+
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) { clearTimeout(timer); clearInterval(progTimer); dx < 0 ? goTo(current + 1) : goTo(current - 1); }
+  });
+
+  const carousel = document.getElementById('carousel');
+  carousel.addEventListener('mouseenter', () => { clearTimeout(timer); clearInterval(progTimer); });
+  carousel.addEventListener('mouseleave', resetProgress);
+
+  goTo(0);
+})();
+</script>
+</body>
+</html>
