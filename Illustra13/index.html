@@ -27,7 +27,7 @@
     body {
       background:var(--ink);
       color:var(--bone);
-      font-family:'Cormorant Garamond',Georgia,serif;
+      font-family:'CollegeBlock',serif;
       min-height:100vh;
       overflow-x:hidden;
     }
@@ -51,7 +51,7 @@
       padding:0 60px; height:80px;
     }
     .logo {
-      font-family:'Bebas Neue',sans-serif;
+      font-family:'CollegeBlock',sans-serif;
       font-size:2.1rem; letter-spacing:10px;
       color:var(--bone); text-decoration:none; cursor:pointer;
       text-shadow:3px 3px 0 var(--blood),6px 6px 0 rgba(139,0,0,0.35),0 0 40px rgba(184,40,42,0.18);
@@ -60,7 +60,7 @@
     .logo:hover { text-shadow:3px 3px 0 var(--crimson),6px 6px 0 rgba(180,40,42,0.5),0 0 60px rgba(184,40,42,0.45); }
     .logo em { font-style:normal; color:var(--ember); }
     .header-badge {
-      font-family:'Cormorant Garamond',serif;
+      font-family:'CollegeBlock',serif;
       font-style:italic; font-size:.62rem;
       letter-spacing:4px; color:var(--gold-dim);
       text-transform:uppercase; display:block; margin-top:3px;
@@ -69,7 +69,7 @@
       display:flex; flex-direction:column; align-items:flex-end; gap:5px;
     }
     .header-tag {
-      font-family:'Cormorant Garamond',serif;
+      font-family:'CollegeBlock',serif;
       font-style:italic; font-size:.75rem;
       color:var(--gold-dim); letter-spacing:3px;
     }
@@ -81,7 +81,7 @@
       animation:pulse 2s ease infinite;
     }
     .live-txt {
-      font-family:'Oswald',sans-serif;
+      font-family:'CollegeBlock',sans-serif;
       font-size:.55rem; letter-spacing:3px;
       color:var(--smoke); text-transform:uppercase;
     }
@@ -93,7 +93,7 @@
       display:flex; justify-content:center;
     }
     nav a {
-      font-family:'Oswald',sans-serif;
+      font-family:'CollegeBlock',sans-serif;
       font-weight:400; font-size:.7rem;
       letter-spacing:5px; text-transform:uppercase;
       color:var(--ash); text-decoration:none;
@@ -112,6 +112,16 @@
     nav a:hover,nav a.active { color:var(--bone); }
     nav a:hover::after,nav a.active::after { right:0; }
 
+    /* FONT */
+    @font-face {
+    font-family: 'CollegeBlock';
+    src: url('./font/CollegeBlock.otf') format('opentype');
+}
+
+.collection-title {
+    font-family: 'CollegeBlock', sans-serif;
+}
+
     /* TICKER */
     .ticker-wrap {
       overflow:hidden;
@@ -125,7 +135,7 @@
     }
     @keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
     .ticker span {
-      font-family:'Oswald',sans-serif;
+      font-family:'CollegeBlock',sans-serif;
       font-size:.6rem; letter-spacing:4px;
       color:rgba(255,255,255,.82); padding:0 40px;
       text-transform:uppercase;
@@ -157,7 +167,7 @@
         repeating-linear-gradient(0deg,rgba(255,255,255,.011) 0px,rgba(255,255,255,.011) 1px,transparent 1px,transparent 80px);
     }
     .about-pre {
-      font-family:'Cormorant Garamond',serif;
+      font-family:'CollegeBlock',serif;
       font-style:italic; font-size:1rem;
       letter-spacing:7px; color:var(--gold);
       text-transform:uppercase; position:relative; z-index:1;
@@ -172,7 +182,7 @@
     .about-pre::after  { background:linear-gradient(90deg,var(--gold),transparent); }
 
     .about-h1 {
-      font-family:'Playfair Display',Georgia,serif;
+      font-family:'CollegeBlock',Georgia,serif;
       font-weight:900;
       font-size:clamp(5rem,13vw,11rem);
       line-height:.85; text-align:center;
@@ -229,13 +239,13 @@
     .stat:hover::before { opacity:1; }
     .stat:last-child { border-right:none; }
     .stat-num {
-      font-family:'Playfair Display',serif;
+      font-family:'CollegeBlock',serif;
       font-size:3.8rem; font-weight:900;
       color:var(--ember); line-height:1; display:block;
       text-shadow:3px 3px 0 var(--blood),0 0 30px rgba(184,40,42,.38);
     }
     .stat-label {
-      font-family:'Oswald',sans-serif;
+      font-family:'CollegeBlock',sans-serif;
       font-size:.6rem; letter-spacing:5px;
       color:var(--gold); text-transform:uppercase;
       margin:10px 0 8px; display:block;
@@ -267,7 +277,7 @@
     .sec-rule { flex:1; height:1px; background:linear-gradient(90deg,var(--cinder),transparent); margin-bottom:10px; }
     .sec-count {
       flex-shrink:0;
-      font-family:'Oswald',sans-serif;
+      font-family:'CollegeBlock',sans-serif;
       font-size:.62rem; letter-spacing:4px;
       color:var(--smoke); text-transform:uppercase; margin-bottom:10px;
     }
@@ -304,12 +314,12 @@
     }
     .card:hover .card-overlay { opacity:1; }
     .ov-label {
-      font-family:'Bebas Neue',sans-serif;
+      font-family:'CollegeBlock',sans-serif;
       font-size:2rem; letter-spacing:8px;
       color:var(--bone); text-shadow:2px 2px 0 var(--blood);
     }
     .ov-sub {
-      font-family:'Cormorant Garamond',serif;
+      font-family:'CollegeBlock',serif;
       font-style:italic; font-size:.85rem;
       letter-spacing:3px; color:var(--gold);
     }
@@ -347,7 +357,7 @@
       position:absolute; top:20px; left:-8px;
       background:var(--ember);
       padding:5px 18px 5px 22px;
-      font-family:'Oswald',sans-serif;
+      font-family:'CollegeBlock',sans-serif;
       font-size:.55rem; letter-spacing:4px;
       color:#fff; text-transform:uppercase;
       box-shadow:3px 3px 10px rgba(0,0,0,.5);
@@ -366,7 +376,7 @@
       background:linear-gradient(90deg,var(--ember),var(--blood));
     }
     .card-name {
-      font-family:'Playfair Display',serif;
+      font-family:'CollegeBlock',serif;
       font-weight:700; font-size:1.1rem;
       color:var(--bone); margin-bottom:8px;
       text-shadow:1px 1px 0 rgba(0,0,0,.5);
@@ -377,7 +387,7 @@
     }
     .card-foot { display:flex; align-items:center; justify-content:space-between; }
     .card-price {
-      font-family:'Bebas Neue',sans-serif;
+      font-family:'CollegeBlock',sans-serif;
       font-size:1.7rem; letter-spacing:2px;
       color:var(--ember);
       text-shadow:2px 2px 0 var(--blood);
@@ -444,7 +454,7 @@
     }
     .detail-back {
       display:inline-flex; align-items:center; gap:10px;
-      font-family:'Oswald',sans-serif;
+      font-family:'CollegeBlock',sans-serif;
       font-size:.6rem; letter-spacing:5px;
       color:var(--smoke); text-transform:uppercase;
       cursor:pointer; border:none; background:none; padding:0;
@@ -457,13 +467,13 @@
     }
     .detail-back:hover .back-line { width:42px; }
     .detail-cat {
-      font-family:'Cormorant Garamond',serif;
+      font-family:'CollegeBlock',serif;
       font-style:italic; font-size:.85rem;
       letter-spacing:5px; color:var(--gold);
       text-transform:uppercase; margin-bottom:16px;
     }
     .detail-title {
-      font-family:'Playfair Display',serif;
+      font-family:'CollegeBlock',serif;
       font-weight:900; font-size:3.2rem; line-height:1;
       color:var(--bone); letter-spacing:-.5px; margin-bottom:28px;
       text-shadow:4px 4px 0 var(--blood),8px 8px 20px rgba(0,0,0,.7);
@@ -485,16 +495,16 @@
     }
     .meta-cell { padding:16px 20px; background:var(--pitch); }
     .meta-key {
-      font-family:'Oswald',sans-serif;
+      font-family:'CollegeBlock',sans-serif;
       font-size:.55rem; letter-spacing:4px;
       color:var(--smoke); text-transform:uppercase; display:block; margin-bottom:4px;
     }
     .meta-val {
-      font-family:'Cormorant Garamond',serif;
+      font-family:'CollegeBlock',serif;
       font-size:.9rem; color:var(--ash);
     }
     .detail-price {
-      font-family:'Bebas Neue',sans-serif;
+      font-family:'CollegeBlock',sans-serif;
       font-size:4rem; letter-spacing:4px;
       color:var(--ember); line-height:1; margin-bottom:40px;
       text-shadow:4px 4px 0 var(--blood),0 0 40px rgba(184,40,42,.28);
@@ -502,7 +512,7 @@
     .order-btn {
       display:inline-flex; align-items:center; gap:16px;
       background:var(--ember); color:#fff;
-      font-family:'Oswald',sans-serif;
+      font-family:'CollegeBlock',sans-serif;
       font-weight:700; font-size:.8rem; letter-spacing:6px;
       text-transform:uppercase; padding:22px 44px;
       text-decoration:none; cursor:pointer; border:none;
@@ -549,7 +559,7 @@
       display:flex; align-items:flex-end; justify-content:space-between; gap:40px;
     }
     .slide-num {
-      font-family:'Oswald',sans-serif;
+      font-family:'CollegeBlock',sans-serif;
       font-size:.6rem; letter-spacing:6px;
       color:var(--gold); text-transform:uppercase;
       margin-bottom:12px; display:block;
@@ -562,13 +572,13 @@
     }
     .slide-title em { font-style:italic; color:var(--ember); }
     .slide-sub {
-      font-family:'Cormorant Garamond',serif;
+      font-family:'CollegeBlock',serif;
       font-style:italic; font-size:1.05rem; letter-spacing:2px;
       color:var(--ash); max-width:480px; line-height:1.7;
     }
     .slide-tag {
       flex-shrink:0;
-      font-family:'Bebas Neue',sans-serif;
+      font-family:'CollegeBlock',sans-serif;
       font-size:1rem; letter-spacing:6px;
       color:var(--ember); border:1px solid var(--ember);
       padding:12px 24px; text-transform:uppercase; align-self:flex-end;
@@ -604,7 +614,7 @@
     }
     .c-slide-badge {
       position:absolute; top:36px; right:60px; z-index:5;
-      font-family:'Bebas Neue',sans-serif;
+      font-family:'CollegeBlock',sans-serif;
       font-size:1rem; letter-spacing:4px; color:rgba(232,223,208,.35);
     }
     .c-slide-badge span { color:var(--bone); font-size:1.6rem; }
@@ -615,7 +625,7 @@
       padding:28px 60px;
       display:flex; align-items:center; justify-content:space-between;
     }
-    .footer-logo { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:8px; color:var(--cinder); }
+    .footer-logo { font-family:'CollegeBlock',sans-serif; font-size:1.1rem; letter-spacing:8px; color:var(--cinder); }
     .footer-logo em { color:var(--blood); font-style:normal; }
     .footer-copy { font-family:'Oswald',sans-serif; font-size:.55rem; letter-spacing:4px; color:var(--cinder); text-transform:uppercase; }
     .footer-skull { color:var(--blood); font-size:.9rem; opacity:.45; }
